@@ -78,26 +78,51 @@ The arrays we are merging are `[]` and `[1]`. The result of the merge is `[1]`. 
 
 ### Solution 💡
 
-#### Java
+```charp
+1. 复制到一个数组中，用Collections API排序
+    public class Solution {
+        public void Merge(int[] nums1, int m, int[] nums2, int n) {
+            for (int i = m, j = 0; j < n; i++, j++) {
+                nums1[i] = nums2[j];
+            }
+            Array.Sort(nums1);
+        }
+    }
+    
+    public class Solution {
+        public void Merge(int[] nums1, int m, int[] nums2, int n) {
+            Array.Copy(nums2, 0, nums1, m, n);
+            Array.Sort(nums1);
+        }
+    
+    时间复杂度：O((m+n)log(m+n))，其中 m 和 n 分别是数组 nums1和 nums2的元素个数。复制元素需要 O(n) 的时间，排序需要 O((m+n)log(m+n)) 的时间。
+    空间复杂度：O(log(m+n))，其中 m 和 n 分别是数组 nums 1和 nums 2的元素个数。排序需要 O(log(m+n)) 的递归调用栈空间。
 
-```java
-class Solution {
-    public void merge(int[] nums1, int m, int[] nums2, int n){
-        int i = m - 1; // index of the last element in the sorted of nums1
-        int j = n - 1; // index of the last element in nums2
-        int k = m + n -1; // index of the last position in nums1 affter merging
-
-        // loop until all elements from nums2 are merged into nums1
-        while (j >= 0){
-            // if nums1 has element left and the current element in nums1 is larger
-            if (i >= 0 && nums1[i] > nums2[j]){
-                nums1[k--] = nums1[i--]; // place nums1's element at position k
-            } else {
-                nums1[k--] = nums2[j--] // Otherwise, place nums2's element at position k
+2.  双指针
+    public class Solution {
+        public void Merge(int[] nums1, int m, int[] nums2, int n) {
+            int i = m - 1, j = n - 1, k = m + n - 1;
+            while (i >= 0 && j >= 0) {
+                if (nums1[i] >= nums2[j]) {
+                    nums1[k--] = nums1[i--];
+                } else {
+                    nums1[k--] = nums2[j--];
+                }
+            }
+            while (i >= 0) {
+                nums1[k--] = nums1[i--];
+            }
+            while (j >= 0) {
+                nums1[k--] = nums2[j--];
             }
         }
     }
-}
-```
+    
+    时间：O(m+n),空间O(1)
 
-You can find the full `Solution.java` file [here](Solution.java).
+    作者：Storm
+    链接：https://leetcode.cn/problems/merge-sorted-array/solutions/1765744/by-stormsunshine-aoru/
+    来源：力扣（LeetCode）
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+    ```
+
