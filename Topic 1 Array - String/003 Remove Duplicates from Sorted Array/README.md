@@ -91,3 +91,28 @@ class Solution {
 ```
 
 You can find the full `Solution.java` file [here](Solution.java) and `AnotherSolution.java` file [here](AnotherSolution.java).
+
+#### c#
+fast slow pointer
+```csharp
+public class Solution {
+    public int RemoveDuplicates(int[] nums) {
+        if(nums.Length == 0){return 0;}
+        int slow = 0, fast = 1;
+        while(fast < nums.Length){
+            if(nums[fast] != nums[slow]){
+                slow = slow + 1;
+                nums[slow] = nums[fast];
+            }
+            fast = fast + 1;
+        }
+        return slow + 1;
+    }
+}
+
+
+作者：Necho
+链接：https://leetcode.cn/problems/remove-duplicates-from-sorted-array/solutions/996194/kuai-man-zhi-zhen-26-shan-chu-you-xu-shu-8v6r/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
