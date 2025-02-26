@@ -91,3 +91,26 @@ class Solution {
 ```
 
 You can find the full `Solution.java` file [here](Solution.java).
+
+#### CSharp
+fast slow pointer
+```csharp
+public class Solution {
+    public int RemoveElement(int[] nums, int val) {
+        int slow = 0;
+        for (int fast = 0; fast < nums.Length; fast++) {
+            if (val != nums[fast]) {
+                nums[slow++] = nums[fast];
+            }
+        }
+        return slow;
+    }
+}
+
+Time complexity: O(n), Space complexity: O(1)
+
+作者：代码随想录
+链接：https://leetcode.cn/problems/remove-element/solutions/1689028/by-carlsun-2-fdc4/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
